@@ -1,0 +1,16 @@
+{#-
+  404 是 Material 的「静态模板」，拿不到 page 内容，所以这里直接写死。
+-#}
+{% extends "main.html" %}
+{% block content %}
+  <div class="notfound">
+    <p class="notfound__kicker">404 · NOT FOUND</p>
+    <h1>这页不见了 🍊</h1>
+    <p>可能是链接拼错了，也可能是我把文章挪走了。</p>
+    <p class="notfound__links">
+      <a class="btn btn--primary" href="/coding/">回首页</a>
+      <a class="btn" href="/coding/blog/">看所有文章</a>
+      <a class="btn" href="/coding/series/">按系列读</a>
+    </p>
+  </div>
+{% endblock %}

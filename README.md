@@ -21,13 +21,13 @@
 ├── .github/workflows/deploy.yml# GitHub Actions：构建并发布到 Pages
 ├── overrides/                  # 主题模板覆盖（不写死在主题里）
 │   ├── partials/post.html      #   列表页的文章卡片
+│   ├── 404.html                #   404 页（静态模板，内容写死）
 │   ├── blog.html               #   列表页按年份分组
 │   ├── partials/content.html   #   文章页标题上方的元信息
 │   └── partials/languages/zh.html #  更短的中文文案
 └── docs/
     ├── index.md                # 首页
     ├── about/index.md          # 关于
-    ├── 404.md                  # 404 页面
     ├── blog/
     │   ├── index.md            # 文章列表（插件会把文章追加在下面）
     │   ├── .authors.yml        # 作者信息

@@ -143,7 +143,3 @@ extra:
 # ----------------------------------------------------------------- 构建
 use_directory_urls: true
 strict: true
-
-# 不在导航里出现的页面（404 由 GitHub Pages 直接访问）
-not_in_nav: |
-  /404.md
