@@ -17,6 +17,7 @@ copyright: Copyright &copy; 2026 严棋耀 · 用 MkDocs Material 搭建
 theme:
   name: material
   language: zh
+  favicon: assets/favicon.svg
   font: false            # 不加载 Google Fonts：中文字体走系统字体，国内访问也快
   icon:
     logo: material/code-tags
