@@ -37,9 +37,6 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          # 第一次运行时自动把 Pages 打开（源 = GitHub Actions）
-          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
