@@ -1,0 +1,156 @@
+/* ==========================================================================
+   字体与基础排版
+   - 不加载 Google Fonts：中文优先使用系统字体（PingFang / 微软雅黑 / Noto）
+   - 中文正文行高略大于 Material 默认值，阅读更松快
+   ========================================================================== */
+
+:root {
+  --md-text-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+    "Source Han Sans SC", "WenQuanYi Micro Hei", sans-serif;
+  --md-code-font-family: "SF Mono", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.md-typeset {
+  line-height: 1.75;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+  letter-spacing: -0.01em;
+}
+
+/* 正文里的链接加下划线，中英混排时更容易识别 */
+.md-typeset p a,
+.md-typeset li a,
+.md-typeset td a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+/* 行内代码在中文段落里不要顶得太满 */
+.md-typeset code {
+  word-break: break-word;
+}
+
+.md-typeset .highlight code {
+  word-break: normal;
+}
+
+/* 表格：内容多时允许横向滚动，行距收紧 */
+.md-typeset table:not([class]) {
+  font-size: 0.7rem;
+}
+
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  padding: 0.45em 0.7em;
+}
+
+/* ==========================================================================
+   首页 Hero
+   ========================================================================== */
+
+.hero {
+  margin: 2.2rem auto 3rem;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0 0 0.6rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.hero p.hero__subtitle {
+  margin: 0 0 1.6rem;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.hero .md-button {
+  margin: 0.2rem 0.15rem;
+}
+
+.hero__meta {
+  margin-top: 1.6rem;
+  color: var(--md-default-fg-color--lighter);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+}
+
+/* 首页卡片网格里，标题与描述之间留白更自然 */
+.md-typeset .grid.cards > ul > li {
+  border-radius: 0.24rem;
+}
+
+.md-typeset .grid.cards > ul > li > hr {
+  margin: 0.6rem 0;
+}
+
+/* ==========================================================================
+   博客文章页
+   ========================================================================== */
+
+/* 文章头部的元信息（日期、作者、阅读时间） */
+.md-post__meta {
+  font-size: 0.66rem;
+}
+
+/* 文章正文的首段稍微大一点，作为“导语” */
+.md-post .md-typeset > p:first-of-type {
+  color: var(--md-default-fg-color--light);
+}
+
+/* 摘要分隔处不显示任何东西 */
+.md-post--excerpt .md-post__content > hr {
+  display: none;
+}
+
+/* ==========================================================================
+   Mermaid 图表
+   ========================================================================== */
+
+.md-typeset .mermaid {
+  margin: 1.2rem 0;
+  text-align: center;
+}
+
+.md-typeset .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==========================================================================
+   小细节
+   ========================================================================== */
+
+/* 键盘按键 */
+.md-typeset kbd {
+  font-size: 0.7em;
+}
+
+/* 页脚社交图标 */
+.md-social__link svg {
+  fill: currentcolor;
+}
+
+/* 目录里的当前小节高亮更明显一点 */
+.md-nav__link--active {
+  font-weight: 600;
+}
+
+/* 打印时隐藏导航 */
+@media print {
+  .md-header,
+  .md-sidebar,
+  .md-footer {
+    display: none;
+  }
+}

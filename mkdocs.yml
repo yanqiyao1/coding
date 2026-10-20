@@ -1,0 +1,147 @@
+# =============================================================================
+#  Coding 笔记 · MkDocs Material 配置
+#  本地预览:  make serve      (或 .venv/bin/mkdocs serve)
+#  构建产物:  site/           (CI 会自动构建并发布到 GitHub Pages)
+# =============================================================================
+
+site_name: Coding 笔记
+site_url: https://yanqiyao1.github.io/coding/
+site_description: 严棋耀的编程笔记 —— C/C++、操作系统、算法与工程实践
+site_author: 严棋耀 Qiyao Yan
+repo_url: https://github.com/yanqiyao1/coding
+repo_name: yanqiyao1/coding
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2026 严棋耀 · 用 MkDocs Material 搭建
+
+# ----------------------------------------------------------------- 主题
+theme:
+  name: material
+  language: zh
+  font: false            # 不加载 Google Fonts：中文字体走系统字体，国内访问也快
+  icon:
+    logo: material/code-tags
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 切换到浅色模式
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+
+# ----------------------------------------------------------------- 导航
+nav:
+  - 首页: index.md
+  - 博客: blog/index.md
+  - 系列:
+      - series/index.md
+      - C 与内存: series/c-memory/index.md
+      - 系统与调试: series/systems/index.md
+      - 工具链: series/tooling/index.md
+  - 关于: about/index.md
+
+# ----------------------------------------------------------------- 插件
+plugins:
+  - search:
+      lang:
+        - zh
+        - en
+  - blog:
+      blog_dir: blog
+      post_dir: "{blog}/posts"
+      pagination_per_page: 8
+      pagination_if_single_page: false
+      categories: true
+      archive: true
+
+# ----------------------------------------------------------------- Markdown
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.snippets
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# ----------------------------------------------------------------- 资源
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  # mermaid.min.js 由 init 脚本按需加载，没图表的页面不会下载它
+  - javascripts/mermaid-init.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/yanqiyao1
+      name: GitHub
+    - icon: fontawesome/solid/envelope
+      link: mailto:yqy.1@foxmail.com
+      name: 邮箱
+    - icon: fontawesome/solid/house
+      link: https://yanqiyao1.github.io/
+      name: 个人主页
+  generator: true
+
+# ----------------------------------------------------------------- 构建
+use_directory_urls: true
+strict: true
+
+# 不在导航里出现的页面（404 由 GitHub Pages 直接访问）
+not_in_nav: |
+  /404.md
