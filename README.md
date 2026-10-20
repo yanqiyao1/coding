@@ -142,16 +142,22 @@ Material 自带的 blog 插件不生成 RSS。需要的话加 [mkdocs-rss-plugin
 
 ## 设计约定
 
-样式只有一套逻辑，改之前先看一眼 `docs/stylesheets/extra.css` 顶部的变量：
+风格是「暖白纸感 + 珊瑚色 + 圆角卡片」。所有视觉决策都收在 `docs/stylesheets/extra.css` 顶部的变量里：
 
-- `--ink` / `--ink-2` / `--ink-3`：正文 / 次要文字 / 注释
-- `--line`：所有分隔线，只有 1px
-- `--brand`：唯一的强调色（链接、悬停）
-- 页面结构：白底、无卡片、无阴影，层级只靠**细线 + 留白**
-- 正文 16.4px / 行高 1.85；文章正文版心 640px（约 39 个汉字一行），列表和首页 720px
+- `--cream` / `--surface` / `--surface-2`：页面底色、卡片、卡片内嵌块
+- `--ink` / `--ink-2` / `--ink-3`：正文 / 次要 / 注释，都是暖灰棕，不用纯灰
+- `--brand`：正文链接（够深、可读）；`--brand-2`：按钮和装饰
+- `--peach` / `--butter` / `--mint` / `--lilac`：标签、年份、提示块用到的淡色
+- `--radius*` / `--shadow*`：圆角和阴影，卡片一律 22px 圆角 + 极浅投影
+
+版式：
+
+- 正文 17px / 行高 1.8；文章卡片 700px，列表和首页 720px
 - 版心用 `px` 而不是 `rem`：Material 在宽屏把根字号设成 20px，`40rem` 其实是 800px，会偏宽
+- 首页 Hero 是一张渐变卡片，右侧的小终端是纯 HTML/CSS，没有图片依赖
+- 深色模式：同名变量在 `[data-md-color-scheme="slate"]` 下重新赋值，Hero 和按钮各有一套单独规则
 
-深色模式是同名的变量在 `[data-md-color-scheme="slate"]` 下重新赋值，改颜色时两边都要改。
+改颜色时优先只动这几个变量；要动结构再看对应的组件段（Hero / panel / post-list / post-meta）。
 
 ## 一点约定
 

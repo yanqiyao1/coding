@@ -26,7 +26,7 @@ hide:
 
 ## 找到我
 
-<div class="index" markdown>
+<div class="panel" markdown>
 
 - [GitHub](https://github.com/yanqiyao1) <span>代码和一些课程项目的仓库</span>
 - [邮箱](mailto:yqy.1@foxmail.com) <span>有问题可以直接发邮件，我基本都会回</span>

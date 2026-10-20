@@ -9,12 +9,12 @@ hide:
 
 一个系列通常会长到 5～10 篇：先讲机制，再讲怎么观察它，最后给一个能跑的例子。系列内的文章会互相引用，建议从头看。
 
-<div class="index" markdown>
+<div class="panel" markdown>
 
-<p class="label">三个系列</p>
+<p class="panel__title">三个系列</p>
 
-- [C 与内存](c-memory/index.md) <span>对象、指针、生命周期、未定义行为、缓存 · 已发布 2 篇</span>
-- [系统与调试](systems/index.md) <span>进程、虚拟内存、链接、gdb、性能测量 · 已发布 1 篇</span>
-- [工具链](tooling/index.md) <span>编译器选项、CMake、Git、Shell · 已发布 1 篇</span>
+- [C 与内存](c-memory/index.md) <span>对象、指针、生命周期、未定义行为、缓存</span>
+- [系统与调试](systems/index.md) <span>进程、虚拟内存、链接、gdb、性能测量</span>
+- [工具链](tooling/index.md) <span>编译器选项、CMake、Git、Shell</span>
 
 </div>
