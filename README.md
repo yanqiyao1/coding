@@ -19,6 +19,9 @@
 ├── Makefile                    # 常用命令
 ├── scripts/new_post.py         # 新建文章的小脚本
 ├── .github/workflows/deploy.yml# GitHub Actions：构建并发布到 Pages
+├── overrides/                  # 主题模板覆盖（不写死在主题里）
+│   ├── partials/post.html      #   列表页的文章卡片
+│   └── partials/languages/zh.html #  更短的中文文案
 └── docs/
     ├── index.md                # 首页
     ├── about/index.md          # 关于
@@ -28,7 +31,7 @@
     │   ├── .authors.yml        # 作者信息
     │   └── posts/              # 所有文章
     ├── series/                 # 按主题组织的系列页
-    ├── stylesheets/extra.css   # 自定义样式（字体、行高、首页 Hero）
+    ├── stylesheets/extra.css   # 设计令牌与全部自定义样式
     ├── javascripts/            # Mermaid 按需加载
     └── assets/images/          # 图片放这里
 ```
@@ -101,8 +104,10 @@ description: 一句话说清楚这篇文章讲什么
 | 想改什么 | 改哪里 |
 | --- | --- |
 | 站点名、描述、导航 | `mkdocs.yml` 顶部 / `nav:` |
-| 主色、配色方案 | `mkdocs.yml` 的 `theme.palette` |
-| 字体、行高、首页样式 | `docs/stylesheets/extra.css` |
+| 主色、明暗方案 | `mkdocs.yml` 的 `theme.palette` |
+| 颜色、字体、间距、首页样式 | `docs/stylesheets/extra.css` 顶部的设计变量 |
+| 列表页的元信息（日期/分类/时长） | `overrides/partials/post.html` |
+| 中文文案（如「阅读全文」） | `overrides/partials/languages/zh.html` |
 | 文章列表每页条数 | `mkdocs.yml` 里 `blog.pagination_per_page` |
 | 分类、年份归档 | `mkdocs.yml` 里 `blog.categories` / `blog.archive` |
 | 首页 Hero 文案 | `docs/index.md` |
@@ -132,6 +137,18 @@ Material 支持图片缩放和标注，详见[官方文档](https://squidfunk.gi
 ### 想要 RSS
 
 Material 自带的 blog 插件不生成 RSS。需要的话加 [mkdocs-rss-plugin](https://github.com/Guts/mkdocs-rss-plugin)，在 `plugins:` 里注册并指向 `blog/posts`。
+
+## 设计约定
+
+样式只有一套逻辑，改之前先看一眼 `docs/stylesheets/extra.css` 顶部的变量：
+
+- `--ink` / `--ink-2` / `--ink-3`：正文 / 次要文字 / 注释
+- `--line`：所有分隔线，只有 1px
+- `--brand`：唯一的强调色（链接、悬停）
+- 页面结构：白底、无卡片、无阴影，层级只靠**细线 + 留白**
+- 标题不加粗到 700 以上，正文 16px / 行高 1.85
+
+深色模式是同名的变量在 `[data-md-color-scheme="slate"]` 下重新赋值，改颜色时两边都要改。
 
 ## 一点约定
 

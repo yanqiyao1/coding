@@ -26,30 +26,10 @@ hide:
 
 ## 找到我
 
-<div class="grid cards" markdown>
+<div class="index" markdown>
 
--   :fontawesome-brands-github:{ .lg .middle } __GitHub__
-
-    ---
-
-    代码和一些课程项目的仓库。
-
-    [:octicons-arrow-right-24: @yanqiyao1](https://github.com/yanqiyao1)
-
--   :material-email-outline:{ .lg .middle } __邮箱__
-
-    ---
-
-    有问题可以直接发邮件，我基本都会回。
-
-    [:octicons-arrow-right-24: yqy.1@foxmail.com](mailto:yqy.1@foxmail.com)
-
--   :material-school-outline:{ .lg .middle } __个人主页__
-
-    ---
-
-    研究方向的介绍、论文和简历。
-
-    [:octicons-arrow-right-24: yanqiyao1.github.io](https://yanqiyao1.github.io/)
+- [GitHub](https://github.com/yanqiyao1) <span>代码和一些课程项目的仓库</span>
+- [邮箱](mailto:yqy.1@foxmail.com) <span>有问题可以直接发邮件，我基本都会回</span>
+- [个人主页](https://yanqiyao1.github.io/) <span>研究方向的介绍、论文和简历</span>
 
 </div>

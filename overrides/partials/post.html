@@ -1,0 +1,40 @@
+{#-
+  列表页的文章卡片：只保留「日期 · 分类 · 阅读时间」三项，
+  去掉冗长的「分类于」「需要 X 分钟阅读时间」。
+-#}
+<article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="{{ post.config.date.created }}">
+            {{- post.config.date.created | date -}}
+          </time>
+        </li>
+        {% if post.categories %}
+          <li class="md-meta__item">
+            {% for category in post.categories %}
+              <a href="{{ category.url | url }}" class="md-meta__link">{{- category.title -}}</a>
+              {%- if loop.revindex > 1 %}, {% endif -%}
+            {% endfor -%}
+          </li>
+        {% endif %}
+        {% if post.config.readtime %}
+          <li class="md-meta__item">
+            {{ post.config.readtime }} 分钟阅读
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    {{ post.content }}
+    {% if post.more %}
+      <nav class="md-post__action">
+        <a href="{{ post.url | url }}">
+          {{ lang.t("blog.continue") }}
+        </a>
+      </nav>
+    {% endif %}
+  </div>
+</article>

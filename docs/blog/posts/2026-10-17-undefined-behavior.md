@@ -9,13 +9,13 @@ description: 未定义行为不是「结果不确定」，而是「编译器可�
 
 C 语言里最容易被误解的一个概念是未定义行为（undefined behavior，简称 UB）。很多人的理解停在「结果不确定，别写就行」，但它真正的含义要严重得多：
 
+<!-- more -->
+
 > **undefined behavior** — behavior, for which this document imposes no requirements.
 >
 > — ISO/IEC 9899:2018, §3.4.3
 
 标准不是「没说结果是什么」，而是**什么都没说**。编译器可以假定这件事永远不会发生，并基于这个假设做优化。于是你写下的那行「溢出一下应该没事」的代码，可能让整个函数被优化成别的东西。
-
-<!-- more -->
 
 ## 第一个例子：有符号溢出
 
