@@ -21,6 +21,7 @@
 ├── .github/workflows/deploy.yml# GitHub Actions：构建并发布到 Pages
 ├── overrides/                  # 主题模板覆盖（不写死在主题里）
 │   ├── partials/post.html      #   列表页的文章卡片
+│   ├── partials/content.html   #   文章页标题上方的元信息
 │   └── partials/languages/zh.html #  更短的中文文案
 └── docs/
     ├── index.md                # 首页
@@ -146,7 +147,8 @@ Material 自带的 blog 插件不生成 RSS。需要的话加 [mkdocs-rss-plugin
 - `--line`：所有分隔线，只有 1px
 - `--brand`：唯一的强调色（链接、悬停）
 - 页面结构：白底、无卡片、无阴影，层级只靠**细线 + 留白**
-- 标题不加粗到 700 以上，正文 16px / 行高 1.85
+- 正文 16.4px / 行高 1.85；文章正文版心 640px（约 39 个汉字一行），列表和首页 720px
+- 版心用 `px` 而不是 `rem`：Material 在宽屏把根字号设成 20px，`40rem` 其实是 800px，会偏宽
 
 深色模式是同名的变量在 `[data-md-color-scheme="slate"]` 下重新赋值，改颜色时两边都要改。
 

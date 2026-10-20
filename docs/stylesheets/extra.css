@@ -66,7 +66,7 @@
 /* --------------------------------------------------------------- 基础排版 */
 
 .md-typeset {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   line-height: 1.85;
   color: var(--ink);
 }
@@ -80,9 +80,11 @@
 }
 
 .md-typeset h1 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  margin-bottom: 0.6rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.7rem;
 }
 
 .md-typeset h2 {
@@ -113,6 +115,18 @@
 .md-typeset li a:hover,
 .md-typeset td a:hover {
   text-decoration-color: var(--brand);
+}
+
+.md-typeset a {
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.md-typeset a:focus-visible,
+.md-nav__link:focus-visible,
+.md-tabs__link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--brand) 45%, transparent);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .md-typeset ::selection {
@@ -224,7 +238,7 @@
   /* Material 用 [dir=ltr] .md-sidebar--primary:not([hidden]) ~ .md-content > .md-content__inner
      给正文加左外边距，这里要显式压回去 */
   .md-content > .md-content__inner {
-    max-width: 43rem;
+    max-width: 720px;
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -246,13 +260,13 @@
 /* --------------------------------------------------------------- 首页 */
 
 .intro {
-  max-width: 40rem;
+  max-width: 640px;
   margin: 0 0 2.4rem;
 }
 
 .intro .kicker {
   margin: 0 0 1.1rem;
-  color: var(--ink-3);
+  color: var(--ink-2);
   font-family: var(--mono);
   font-size: 0.6rem;
   letter-spacing: 0.05em;
@@ -260,16 +274,16 @@
 }
 
 .intro h1 {
-  margin: 0 0 1rem;
-  font-size: 1.75rem;
+  margin: 0 0 1.1rem;
+  font-size: 2.1rem;
   font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  line-height: 1.28;
+  letter-spacing: -0.025em;
 }
 
 .intro .lead {
   margin: 0 0 1.4rem;
-  max-width: 32rem;
+  max-width: 512px;
   color: var(--ink-2);
   font-size: 0.82rem;
   line-height: 1.8;
@@ -299,12 +313,12 @@
 /* 首页索引列表 */
 .index {
   margin: 0 0 2.6rem;
-  max-width: 44rem;
+  max-width: 720px;
 }
 
 .index .label {
   margin: 0 0 0.6rem;
-  color: var(--ink-3);
+  color: var(--ink-2);
   font-family: var(--mono);
   font-size: 0.6rem;
   letter-spacing: 0.14em;
@@ -371,7 +385,7 @@
 
 /* 首页页脚说明 */
 .note {
-  max-width: 44rem;
+  max-width: 720px;
   padding-top: 1.4rem;
   border-top: 1px solid var(--line);
   color: var(--ink-3);
@@ -468,65 +482,56 @@
 
 /* --------------------------------------------------------------- 文章页 */
 
-/* 左侧信息栏：压窄，去掉多余的字 */
+/* 文章页：不再用左侧信息栏，正文居中，元信息放在标题上方 */
+.md-content--post {
+  display: block;
+}
+
+.md-content--post > .md-sidebar--post {
+  display: none;
+}
+
+.md-content--post > .md-content__inner {
+  max-width: 684px;              /* 640 正文 + 左右各 22px 内边距 */
+  padding-left: 22px;
+  padding-right: 22px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 右侧有目录时，给正文同样的左边距，视觉上才是居中的 */
 @media screen and (min-width: 76.25em) {
-  .md-content--post {
-    justify-content: center;
-    gap: 2.6rem;
-  }
-
-  .md-sidebar.md-sidebar--post {
-    width: 8.5rem;
-  }
-
-  .md-content--post > .md-content__inner {
-    max-width: 42rem;
-    margin: 0;
+  .md-sidebar--secondary:not([hidden]) ~ .md-content--post {
+    padding-left: 12.1rem;
   }
 }
 
-.md-sidebar--post .md-post__back a {
+/* 标题上方的元信息行 */
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin: 0 0 0.85rem;
   color: var(--ink-3);
-  font-size: 0.66rem;
-}
-
-.md-sidebar--post .md-author img {
-  width: 1.8rem;
-  border-radius: 50%;
-}
-
-/* 作者块只留名字：简介文字的 font-size 归零，<strong> 里的名字单独恢复 */
-.md-sidebar--post .md-profile__description {
-  font-size: 0;
-  line-height: 0;
-}
-
-.md-sidebar--post .md-profile__description strong {
-  font-size: 0.7rem;
-  line-height: 1.4;
-}
-
-/* 元信息里的小图标在窄栏里很吵，去掉 */
-.md-sidebar--post li .md-nav__link svg {
-  display: none;
-}
-
-.md-sidebar--post li .md-nav__link {
-  padding-left: 0;
-}
-
-.md-sidebar--post .md-post__title {
-  display: none;
-}
-
-.md-sidebar--post .md-nav__link {
-  color: var(--ink-2);
   font-size: 0.64rem;
+  letter-spacing: 0.01em;
 }
 
-/* 文章正文 */
-.md-content--post .md-typeset {
-  font-size: 0.8rem;
+.post-meta > * + *::before {
+  content: "·";
+  margin-right: 0.45rem;
+  color: var(--ink-3);
+  opacity: 0.5;
+}
+
+.post-meta a {
+  color: var(--ink-2);
+  text-decoration: none;
+}
+
+.post-meta a:hover {
+  color: var(--brand);
 }
 
 /* --------------------------------------------------------------- 目录 */
@@ -583,6 +588,11 @@
 .md-typeset .highlight code {
   font-size: 0.7rem;
   line-height: 1.7;
+}
+
+.md-typeset .highlight pre {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
 }
 
 .md-typeset code {
@@ -681,7 +691,7 @@
   }
 
   .intro h1 {
-    font-size: 1.55rem;
+    font-size: 1.7rem;
   }
 
   .index li {
@@ -713,39 +723,5 @@
   .md-sidebar,
   .md-footer {
     display: none;
-  }
-}
-
-/* --------------------------------------------------------------- 小屏文章页 */
-
-/* 手机上文章信息栏在 DOM 里排在正文之后，这里把它提到标题上方，
-   并去掉占地方的头像块，只留下「全部文章」和日期/分类/时长 */
-@media screen and (max-width: 76.24em) {
-  /* Material 在手机上用 column-reverse 把信息栏放到了正文后面 */
-  .md-content--post {
-    flex-direction: column;
-  }
-
-  .md-sidebar.md-sidebar--post {
-    order: -1;
-    margin-bottom: 1.2rem;
-    padding: 0 0 0.9rem;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .md-sidebar--post .md-post__authors,
-  .md-sidebar--post .md-post__profile {
-    display: none;
-  }
-
-  /* 手机上这个「全部文章」标题被 Material 隐藏了，留着只是一块空白 */
-  .md-sidebar--post .md-post__back {
-    display: none;
-  }
-
-  .md-sidebar--post .md-nav__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 0.7rem;
   }
 }
