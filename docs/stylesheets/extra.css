@@ -395,6 +395,18 @@
 
 /* --------------------------------------------------------------- 博客列表 */
 
+/* 年份分组的小标题 */
+.post-list > .year {
+  margin: 2.2rem 0 0.9rem;
+  padding: 0;
+  border: 0;
+  color: var(--ink-3);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+
 .md-post--excerpt {
   margin-bottom: 1.9rem;
   padding-bottom: 1.9rem;
