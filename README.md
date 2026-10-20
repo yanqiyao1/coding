@@ -4,6 +4,8 @@
 
 **<https://yanqiyao1.github.io/coding/>**
 
+[![Deploy to GitHub Pages](https://github.com/yanqiyao1/coding/actions/workflows/deploy.yml/badge.svg)](https://github.com/yanqiyao1/coding/actions/workflows/deploy.yml)
+
 它和学术主页（`yanqiyao1.github.io`）是两个完全独立的仓库，互不影响。
 
 ---
