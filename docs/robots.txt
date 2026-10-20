@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yanqiyao1.github.io/coding/sitemap.xml
