@@ -133,17 +133,29 @@ description: 一个装饰器到底包住了什么
 
 路径按当前文件位置算相对路径。
 
-### 想用数学公式
+### 数学公式
 
-现在没开（避免每个页面加载 KaTeX）。需要时在 `mkdocs.yml` 里加：
+已启用，用的是**本地化的 KaTeX**（不走 CDN）：
 
-```yaml
-markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
+- `pymdownx.arithmatex`（`generic: true`）负责把 `$...$` / `$$...$$` 包成 `\(...\)` / `\[...\]`
+- `docs/assets/katex/` 里是 KaTeX 的 JS、CSS 和 woff2 字体
+- `docs/javascripts/katex.js` 在每次页面切换后调用 `renderMathInElement`
+
+写法：
+
+```markdown
+行内：$\sqrt{d_k}$
+块级：
+$$
+\mathrm{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+$$
 ```
 
-再在 `extra_css` / `extra_javascript` 里引入 KaTeX 并调用 `renderMathInElement`。目前文章里的公式用 `text` 代码块写，够读。
+注意：`$` 在正文里会被当公式定界符，写美元符号请用 `\$`；代码块和行内代码里的 `$` 不受影响。
+
+### 流程图
+
+Mermaid 图表用 `mermaid-chart` 这个自定义类名，避开 Material 9.7 自带的 Mermaid 加载器（它会从 unpkg 拉 CDN）。图表库是本地 `docs/javascripts/mermaid.min.js`，只有页面里出现图时才加载，失败会退到 jsDelivr。
 
 ## 设计约定
 

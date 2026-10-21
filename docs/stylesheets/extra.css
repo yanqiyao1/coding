@@ -994,6 +994,26 @@ a.card:hover .card__arrow {
 /* --------------------------------------------------------------- 图表 */
 
 /* 用自定义类名避开 Material 自带的 mermaid 加载器（它会从 unpkg 拉 CDN） */
+
+/* 图表不要套一层代码块外壳 */
+.md-typeset .highlight:has(> pre.mermaid-chart) {
+  margin: 1.4rem 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.md-typeset .highlight > pre.mermaid-chart,
+.md-typeset pre.mermaid-chart {
+  margin: 1.4rem 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
 .md-typeset .mermaid-chart {
   margin: 1.3rem 0;
   padding: 0.8rem 0.5rem;
@@ -1006,6 +1026,27 @@ a.card:hover .card__arrow {
 .md-typeset .mermaid-chart svg {
   max-width: 100%;
   height: auto;
+}
+
+/* --------------------------------------------------------------- 数学公式 */
+
+.md-typeset .katex {
+  font-size: 1.04em;
+}
+
+.md-typeset .katex-display {
+  margin: 1.3rem 0;
+  padding: 0.15rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.md-typeset .katex-display > .katex {
+  font-size: 1.08em;
+}
+
+.md-typeset .katex-display::-webkit-scrollbar {
+  height: 4px;
 }
 
 /* --------------------------------------------------------------- 目录 */

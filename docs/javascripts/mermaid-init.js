@@ -19,23 +19,40 @@
       : "light";
   }
 
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.onload = function () {
+        resolve();
+      };
+      script.onerror = function () {
+        reject(new Error("加载失败：" + src));
+      };
+      document.head.appendChild(script);
+    });
+  }
+
   function loadMermaid() {
     if (window.mermaid) return Promise.resolve(window.mermaid);
     if (loading) return loading;
 
-    loading = new Promise(function (resolve, reject) {
-      var script = document.createElement("script");
-      script.src = new URL("mermaid.min.js", self.src).href;
-      script.async = true;
-      script.onload = function () {
-        resolve(window.mermaid);
-      };
-      script.onerror = function () {
+    // 先本地（快、可离线），失败再退到 CDN
+    var local = new URL("mermaid.min.js", self.src).href;
+    var cdn = "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js";
+
+    loading = loadScript(local)
+      .catch(function () {
+        return loadScript(cdn);
+      })
+      .then(function () {
+        return window.mermaid;
+      })
+      .catch(function (err) {
         loading = null;
-        reject(new Error("无法加载 mermaid.min.js"));
-      };
-      document.head.appendChild(script);
-    });
+        throw err;
+      });
 
     return loading;
   }

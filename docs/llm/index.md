@@ -11,12 +11,16 @@ hide:
 
 ```mermaid
 flowchart LR
-    A[预训练<br/>Pretraining] --> B[后训练<br/>SFT · 偏好学习 · RL]
-    B --> C[推理与生成<br/>Reasoning · Math · Code]
-    C --> D[Agent<br/>Tool Use · 长程任务]
+    A[预训练] --> B[后训练]
+    B --> C[推理与生成]
+    C --> D[Agent]
     B --> E[评测与数据回流]
-    E -.-> B
 ```
+
+- **后训练**：SFT、偏好学习、RL，三条主线的公共底座
+- **推理与生成**：Reasoning、Math、Code
+- **Agent**：Tool Use、长程任务
+- 评测结果会回流成下一轮后训练的数据（这条线画出来会让图变乱，所以写在图外）
 
 <div class="panel" markdown>
 

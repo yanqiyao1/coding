@@ -46,7 +46,7 @@ print(x.grad)        # tensor([2., 4., 6.])
 3. `backward()` 从 `y` 出发，沿着 `grad_fn` 链把梯度一层层传回去
 4. 传回来的梯度**累加**到叶子张量的 `.grad` 上
 
-`x.grad` 是 `[2, 4, 6]`，因为 `d(x²)/dx = 2x`，代入 `x = [1,2,3]` 正好是 `[2,4,6]`。
+`x.grad` 是 `[2, 4, 6]`，因为 $\frac{d}{dx}x^2 = 2x$，代入 `x = [1,2,3]` 正好是 `[2,4,6]`。
 
 !!! note "叶子与非叶子"
 
@@ -56,17 +56,17 @@ print(x.grad)        # tensor([2., 4., 6.])
 
 模型和损失：
 
-```text
-ŷ = w·x + b
-L = (1/n) · Σ (ŷᵢ − yᵢ)²
-```
+$$
+\hat{y} = wx + b, \qquad L = \frac{1}{n}\sum_{i=1}^{n}(\hat{y}_i - y_i)^2
+$$
 
-分别对 `w` 和 `b` 求偏导：
+分别对 $w$ 和 $b$ 求偏导：
 
-```text
-∂L/∂w = (2/n) · Σ (ŷᵢ − yᵢ)·xᵢ
-∂L/∂b = (2/n) · Σ (ŷᵢ − yᵢ)
-```
+$$
+\frac{\partial L}{\partial w} = \frac{2}{n}\sum_{i=1}^{n}(\hat{y}_i - y_i)\,x_i,
+\qquad
+\frac{\partial L}{\partial b} = \frac{2}{n}\sum_{i=1}^{n}(\hat{y}_i - y_i)
+$$
 
 用 `w=1, b=0`，数据 `x=[1,2,3]`、`y=[3,5,7]` 算一遍：
 

@@ -91,6 +91,8 @@ markdown_extensions:
   - def_list
   - footnotes
   - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
   - tables
   - toc:
       permalink: true
@@ -123,11 +125,16 @@ markdown_extensions:
 
 # ----------------------------------------------------------------- 资源
 extra_css:
+  - assets/katex/katex.min.css
   - stylesheets/extra.css
 
 extra_javascript:
   # mermaid.min.js 由 init 脚本按需加载，没图表的页面不会下载它
   - javascripts/mermaid-init.js
+  # 数学公式：KaTeX 本地化，不依赖 CDN
+  - assets/katex/katex.min.js
+  - assets/katex/auto-render.min.js
+  - javascripts/katex.js
   - javascripts/read-progress.js
 
 extra:

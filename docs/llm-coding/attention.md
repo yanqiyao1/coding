@@ -9,9 +9,10 @@ description: 从公式到多头，再到和 F.scaled_dot_product_attention 对�
 
 ## 公式与形状
 
-```text
-Attention(Q, K, V) = softmax(Q·Kᵀ / √d_k) · V
-```
+$$
+\mathrm{Attention}(Q, K, V)
+= \mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right) V
+$$
 
 约定输入形状：
 
@@ -51,7 +52,7 @@ def attention(q, k, v, causal=True):
 
 - `transpose(-2, -1)` 只交换最后两维，前面的 `[B, H]` 不动
 - mask 用 `-inf` 而不是 0：`softmax` 之前要让它变成 0 概率
-- 除的是 `√d`，不是 `d`
+- 除的是 $\sqrt{d}$，不是 $d$
 
 跑一下：
 
@@ -74,11 +75,11 @@ print(a[0, 0].triu(1).abs().max())   # tensor(0.)
 
 `q·k` 是 `d` 个乘积的和。如果 `q`、`k` 的每个分量独立、均值 0、方差 1，那么点积的方差是 `d`，标准差是 `√d`。
 
-不缩放的话，`d=64` 时分数会散布在 ±8 左右，`softmax` 会变得非常尖锐——几乎变成 one-hot，梯度接近 0，训练不动。除以 `√d` 把方差拉回 1 附近，softmax 的输出才「软」得起来。
+不缩放的话，$d=64$ 时分数会散布在 ±8 左右，`softmax` 会变得非常尖锐——几乎变成 one-hot，梯度接近 0，训练不动。除以 $\sqrt{d}$ 把方差拉回 1 附近，softmax 的输出才「软」得起来。
 
 !!! note "面试追问：为什么是 √d 而不是 d"
 
-    目标是让点积的**方差**回到 1。点积方差是 `d`，所以要除以 `√d`；除以 `d` 会把方差压成 `1/d`，反而过平滑。
+    目标是让点积的**方差**回到 1。点积方差是 $d$，所以要除以 $\sqrt{d}$；除以 $d$ 会把方差压成 $1/d$，反而过平滑。
 
 ## 多头：只是换个形状
 
