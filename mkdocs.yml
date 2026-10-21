@@ -128,6 +128,7 @@ extra_css:
 extra_javascript:
   # mermaid.min.js 由 init 脚本按需加载，没图表的页面不会下载它
   - javascripts/mermaid-init.js
+  - javascripts/read-progress.js
 
 extra:
   social:

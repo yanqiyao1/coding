@@ -8,8 +8,8 @@ hide:
 <div class="hero">
   <div class="hero__text">
     <p class="hero__kicker">🍊 严棋耀 · 北京大学</p>
-    <h1>把学到的东西讲清楚</h1>
-    <p class="hero__lead">Python、C++、算法，以及 LLM 手撕与大模型方向。<br>按模块整理，学习和面试都用得上。</p>
+    <h1>把学到的东西<br><span class="hero__accent">讲清楚。</span></h1>
+    <p class="hero__lead">Python、C++、算法，以及 LLM 手撕与大模型方向。按模块整理，机制讲透，代码跑通——学习和面试都用得上。</p>
     <p class="hero__actions">
       <a class="btn btn--primary" href="python/">开始阅读 →</a>
       <a class="btn" href="about/">关于我</a>
@@ -25,16 +25,60 @@ hide:
   </div>
 </div>
 
-<div class="panel" markdown>
+<div class="section-kicker">
+  <p class="section-kicker__title">五个模块</p>
+  <p class="section-kicker__hint">从语言基础到大模型，各成体系</p>
+</div>
 
-<p class="panel__title">🗂 五个模块</p>
-
-- [🐍 Python](python/index.md) <span>语言基础 → PyTorch → 能跑起来的 LLM 项目</span>
-- [⚙️ C++](cpp/index.md) <span>对象模型、RAII、移动语义、并发与性能</span>
-- [🧮 算法](algo/index.md) <span>按题型刷 LeetCode，统一 C++ 实现</span>
-- [🤖 LLM 手撕](llm-coding/index.md) <span>Attention、RoPE、KV Cache、Sampling</span>
-- [🧠 LLM 方向](llm/index.md) <span>强化学习、后训练、Code Agent 三条主线的知识地图</span>
-
+<div class="cards">
+  <a class="card" href="python/">
+    <span class="card__icon">🐍</span>
+    <span class="card__text">
+      <span class="card__title">Python</span>
+      <span class="card__desc">语言基础 → PyTorch → 能跑起来的 LLM 项目</span>
+    </span>
+    <span class="card__arrow">→</span>
+  </a>
+  <a class="card" href="cpp/">
+    <span class="card__icon">⚙️</span>
+    <span class="card__text">
+      <span class="card__title">C++</span>
+      <span class="card__desc">对象模型、RAII、移动语义、并发与性能</span>
+    </span>
+    <span class="card__arrow">→</span>
+  </a>
+  <a class="card" href="algo/">
+    <span class="card__icon">🧮</span>
+    <span class="card__text">
+      <span class="card__title">算法</span>
+      <span class="card__desc">按题型刷 LeetCode，统一 C++ 实现</span>
+    </span>
+    <span class="card__arrow">→</span>
+  </a>
+  <a class="card" href="llm-coding/">
+    <span class="card__icon">🤖</span>
+    <span class="card__text">
+      <span class="card__title">LLM 手撕</span>
+      <span class="card__desc">Attention、RoPE、KV Cache、Sampling</span>
+    </span>
+    <span class="card__arrow">→</span>
+  </a>
+  <a class="card" href="llm/">
+    <span class="card__icon">🧠</span>
+    <span class="card__text">
+      <span class="card__title">LLM 方向</span>
+      <span class="card__desc">强化学习、后训练、Code Agent 的知识地图</span>
+    </span>
+    <span class="card__arrow">→</span>
+  </a>
+  <a class="card" href="about/">
+    <span class="card__icon">👋</span>
+    <span class="card__text">
+      <span class="card__title">关于我</span>
+      <span class="card__desc">北京大学在读，写 C/C++ 与系统，做 LLM 推理研究</span>
+    </span>
+    <span class="card__arrow">→</span>
+  </a>
 </div>
 
 <div class="note" markdown>
