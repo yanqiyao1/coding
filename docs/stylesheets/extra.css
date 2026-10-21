@@ -167,7 +167,7 @@ html {
 /* --------------------------------------------------------------- 基础排版 */
 
 .md-typeset {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   line-height: 1.85;
   color: var(--ink);
   text-rendering: optimizeLegibility;
@@ -429,20 +429,91 @@ html {
 /* --------------------------------------------------------------- 版心 */
 
 @media screen and (min-width: 76.25em) {
+  /* 两栏：正文宽卡 + 右侧目录 */
+  .md-main__inner {
+    max-width: 1140px;
+  }
+
+  .md-main__inner:has(.hero) {
+    max-width: 1280px;
+  }
+
   .md-sidebar--primary {
     display: none;
   }
 
-  /* 文章页：窄版心利于阅读 */
+  .md-sidebar--secondary:not([hidden]) {
+    display: block;
+    order: 2;
+    width: 200px;
+    top: 5.2rem;
+    align-self: flex-start;
+    padding: 0;
+  }
+
+  /* 侧栏做成和正文同一套的卡片 */
+  .md-sidebar__inner {
+    padding: 0.85rem 0.9rem 1rem;
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    background-color: var(--surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .md-sidebar--primary .md-nav__title {
+    display: none;
+  }
+
+  .md-sidebar .md-nav__title {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0 0 0.4rem;
+    color: var(--ink-3);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .md-sidebar .md-nav__link {
+    font-size: 0.68rem;
+    color: var(--ink-2);
+    padding: 0.2rem 0;
+  }
+
+  .md-sidebar .md-nav__link--active,
+  .md-sidebar .md-nav__link:hover {
+    color: var(--brand);
+  }
+
+  .md-sidebar .md-nav__item--section > .md-nav__link {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* 文章页：用满中间这一栏 */
   .md-content > .md-content__inner {
-    max-width: 720px;
+    max-width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .md-content__inner.md-typeset:not(:has(.hero)) {
+    max-width: 880px;
     margin-left: auto !important;
     margin-right: auto !important;
+    padding: 2.4rem 3rem 3rem;
   }
 
   /* 首页：宽版心，才撑得起大标题与卡片网格 */
   .md-content > .md-content__inner:has(.hero) {
     max-width: 56rem;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* 有了右侧目录，就不再显示正文里的目录块 */
+  .toc-inline {
+    display: none;
   }
 }
 
@@ -981,8 +1052,8 @@ a.card:hover .card__arrow {
 
 /* 所有内容页（首页除外）都装进一张卡片里 */
 .md-content__inner.md-typeset:not(:has(.hero)) {
-  max-width: 720px;
-  padding: 2.2rem 2.5rem 2.8rem;
+  max-width: 880px;
+  padding: 2.4rem 3rem 3rem;
   border: 1px solid var(--hairline);
   border-radius: 26px;
   background-color: var(--surface);
@@ -1051,10 +1122,15 @@ a.card:hover .card__arrow {
 
 /* --------------------------------------------------------------- 目录 */
 
-/* 右侧目录收起来，改成正文里的折叠块（见 content.html） */
+/* 宽屏用右侧目录；窄屏一律收起，回退到正文里的目录块（见 content.html） */
+@media screen and (max-width: 76.24em) {
+  .md-sidebar.md-sidebar--secondary {
+    display: none !important;
+  }
+}
+
 @media screen and (min-width: 76.25em) {
-  /* 主题用 .md-sidebar--secondary:not([hidden]) 强制显示，这里要更高优先级 */
-  .md-sidebar.md-sidebar--secondary:not([hidden]) {
+  .toc-inline {
     display: none;
   }
 }
@@ -1218,6 +1294,7 @@ a.card:hover .card__arrow {
 /* --------------------------------------------------------------- 表格、提示框 */
 
 .md-typeset table:not([class]) {
+  width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   font-size: 0.74rem;
@@ -1394,10 +1471,12 @@ a.card:hover .card__arrow {
   }
 
   .md-content__inner.md-typeset:not(:has(.hero)) {
+    width: calc(100% - 1.8rem);
+    max-width: 880px;
     padding: 1.3rem 1.15rem 1.7rem;
     border-radius: var(--radius);
-    margin-left: 0.9rem !important;
-    margin-right: 0.9rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   .md-typeset h1 {
