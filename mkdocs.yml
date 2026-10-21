@@ -69,6 +69,11 @@ nav:
       - 进阶: cpp/advanced/index.md
   - 算法: algo/index.md
   - LLM 手撕: llm-coding/index.md
+  - LLM 方向:
+      - llm/index.md
+      - 强化学习: llm/rl/index.md
+      - 后训练: llm/post-training/index.md
+      - Code Agent: llm/code-agent/index.md
   - 关于: about/index.md
 
 # ----------------------------------------------------------------- 插件
@@ -108,7 +113,7 @@ markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
-          class: mermaid
+          class: mermaid-chart
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true

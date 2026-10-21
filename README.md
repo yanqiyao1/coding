@@ -10,7 +10,7 @@
 
 ---
 
-## 四个模块
+## 五个模块
 
 | 模块 | 内容 |
 | --- | --- |
@@ -18,6 +18,7 @@
 | **C++** | 基础（对象模型、STL）→ 进阶（RAII、移动语义、并发） |
 | **算法** | 按题型整理的 LeetCode 题解，统一 C++ |
 | **LLM 手撕** | 面试要手写的组件：Attention、RoPE、KV Cache、Sampling |
+| **LLM 方向** | 强化学习 / 后训练 / Code Agent 三条主线的知识地图、学习路径与面试题 |
 
 ## 目录结构
 
@@ -51,6 +52,11 @@
     ├── llm-coding/
     │   ├── index.md            # 题目清单
     │   └── attention.md
+    ├── llm/                    # LLM 方向知识地图
+    │   ├── index.md
+    │   ├── rl/
+    │   ├── post-training/
+    │   └── code-agent/
     ├── stylesheets/extra.css   # 设计令牌与全部自定义样式
     ├── javascripts/            # Mermaid 按需加载
     └── assets/images/          # 图片放这里

@@ -656,6 +656,19 @@ body {
   margin-right: auto !important;
 }
 
+/* --------------------------------------------------------------- 图表 */
+
+/* 用自定义类名避开 Material 自带的 mermaid 加载器（它会从 unpkg 拉 CDN） */
+.md-typeset .mermaid-chart {
+  margin: 1.2rem 0;
+  text-align: center;
+}
+
+.md-typeset .mermaid-chart svg {
+  max-width: 100%;
+  height: auto;
+}
+
 /* --------------------------------------------------------------- 目录 */
 
 /* 右侧目录收起来，改成正文里的折叠块（见 content.html） */

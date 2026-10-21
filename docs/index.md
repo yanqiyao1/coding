@@ -9,7 +9,7 @@ hide:
   <div class="hero__text">
     <p class="hero__kicker">🍊 严棋耀 · 北京大学</p>
     <h1>把学到的东西讲清楚</h1>
-    <p class="hero__lead">Python、C++、算法与 LLM 手撕代码。<br>按模块整理，学习和面试都用得上。</p>
+    <p class="hero__lead">Python、C++、算法，以及 LLM 手撕与大模型方向。<br>按模块整理，学习和面试都用得上。</p>
     <p class="hero__actions">
       <a class="btn btn--primary" href="python/">开始阅读 →</a>
       <a class="btn" href="about/">关于我</a>
@@ -27,12 +27,13 @@ hide:
 
 <div class="panel" markdown>
 
-<p class="panel__title">🗂 四个模块</p>
+<p class="panel__title">🗂 五个模块</p>
 
 - [🐍 Python](python/index.md) <span>语言基础 → PyTorch → 能跑起来的 LLM 项目</span>
 - [⚙️ C++](cpp/index.md) <span>对象模型、RAII、移动语义、并发与性能</span>
 - [🧮 算法](algo/index.md) <span>按题型刷 LeetCode，统一 C++ 实现</span>
 - [🤖 LLM 手撕](llm-coding/index.md) <span>Attention、RoPE、KV Cache、Sampling</span>
+- [🧠 LLM 方向](llm/index.md) <span>强化学习、后训练、Code Agent 三条主线的知识地图</span>
 
 </div>
 

@@ -2,18 +2,21 @@
    Mermaid 按需加载
    - 只有页面里真的出现 ```mermaid 代码块时才去下载 mermaid.min.js（约 3.4 MB）
    - 支持 Material 的即时加载（instant loading）与深/浅色切换后重绘
+   - 渲染是串行的：上一次没画完不会重复触发，避免把图元清空
    ========================================================================== */
 
 (function () {
   "use strict";
 
   var self = document.currentScript;
-  var sourceCache = new WeakMap();
+  var sources = new WeakMap();
   var loading = null;
-  var lastScheme = null;
+  var state = { scheme: null, busy: false, pending: false, timer: null };
 
-  function isDark() {
-    return document.body.getAttribute("data-md-color-scheme") === "slate";
+  function currentScheme() {
+    return document.body.getAttribute("data-md-color-scheme") === "slate"
+      ? "dark"
+      : "light";
   }
 
   function loadMermaid() {
@@ -37,64 +40,89 @@
     return loading;
   }
 
+  function initMermaid(mermaid, scheme) {
+    if (state.scheme === scheme) return;
+    state.scheme = scheme;
+
+    var dark = scheme === "dark";
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "base",
+      securityLevel: "loose",
+      fontFamily: getComputedStyle(document.body).fontFamily,
+      themeVariables: {
+        background: dark ? "#241f1b" : "#ffffff",
+        primaryColor: dark ? "#332a24" : "#fdf7f1",
+        primaryTextColor: dark ? "#f6ede5" : "#2b2320",
+        primaryBorderColor: dark ? "#4b3d34" : "#e7d5c5",
+        lineColor: dark ? "#b9a496" : "#8a7566",
+        secondaryColor: dark ? "#3a2a22" : "#fbe7da",
+        tertiaryColor: dark ? "#241f1b" : "#fbf6f0",
+        noteBkgColor: dark ? "#332a24" : "#fbf0e4",
+        noteTextColor: dark ? "#f6ede5" : "#2b2320",
+      },
+    });
+  }
+
   function render() {
     var nodes = Array.prototype.slice.call(
-      document.querySelectorAll(".mermaid")
+      document.querySelectorAll(".mermaid-chart")
     );
     if (!nodes.length) return;
 
+    if (state.busy) {
+      state.pending = true;
+      return;
+    }
+    state.busy = true;
+
     loadMermaid()
       .then(function (mermaid) {
-        lastScheme = isDark() ? "dark" : "default";
+        initMermaid(mermaid, currentScheme());
 
-        // 还原成原始的图定义，再交给 mermaid 重新渲染
         nodes.forEach(function (node) {
-          if (!sourceCache.has(node)) {
-            sourceCache.set(node, node.textContent);
+          if (!sources.has(node)) {
+            sources.set(node, node.textContent);
           }
           node.removeAttribute("data-processed");
-          node.textContent = sourceCache.get(node);
+          node.textContent = sources.get(node);
         });
 
-        mermaid.initialize({
-          startOnLoad: false,
-          theme: lastScheme,
-          securityLevel: "loose",
-          fontFamily: getComputedStyle(document.body).fontFamily,
-        });
-
-        try {
-          mermaid.run({ nodes: nodes });
-        } catch (err) {
-          console.warn("[mermaid]", err);
-        }
+        return mermaid.run({ nodes: nodes });
       })
       .catch(function (err) {
         console.warn("[mermaid]", err);
+      })
+      .then(function () {
+        state.busy = false;
+        if (state.pending) {
+          state.pending = false;
+          render();
+        }
       });
+  }
+
+  function schedule(delay) {
+    window.clearTimeout(state.timer);
+    state.timer = window.setTimeout(render, delay || 0);
   }
 
   // 每次页面切换（含即时加载）后渲染
   if (window.document$) {
     window.document$.subscribe(function () {
-      render();
+      schedule(0);
     });
   } else if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", render);
+    document.addEventListener("DOMContentLoaded", function () {
+      schedule(0);
+    });
   } else {
-    render();
+    schedule(0);
   }
 
   // 深浅色切换后按新主题重绘
-  var timer = null;
   new MutationObserver(function () {
-    var scheme = isDark() ? "dark" : "default";
-    if (scheme === lastScheme) return;
-
-    window.clearTimeout(timer);
-    timer = window.setTimeout(function () {
-      render();
-    }, 120);
+    schedule(120);
   }).observe(document.body, {
     attributes: true,
     attributeFilter: ["data-md-color-scheme"],

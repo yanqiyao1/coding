@@ -14,13 +14,6 @@
       {% for item in page.toc %}
         <li>
           <a href="{{ item.url }}">{{ item.title }}</a>
-          {% if item.children %}
-            <ol>
-              {% for child in item.children %}
-                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
-              {% endfor %}
-            </ol>
-          {% endif %}
         </li>
       {% endfor %}
     </ol>
