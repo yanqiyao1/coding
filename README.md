@@ -159,19 +159,37 @@ Mermaid 图表用 `mermaid-chart` 这个自定义类名，避开 Material 9.7 �
 
 ## 设计约定
 
-风格是「暖白纸感 + 珊瑚色 + 圆角卡片」。所有视觉决策都收在 `docs/stylesheets/extra.css` 顶部的变量里：
+风格是「深蓝黑 + 霓虹青」的科技风，深色优先，浅色是一套对应的冷白配色。所有视觉决策都收在 `docs/stylesheets/extra.css` 顶部的变量里：
 
-- `--cream` / `--surface` / `--surface-2`：页面底色、卡片、卡片内嵌块
-- `--ink` / `--ink-2` / `--ink-3`：正文 / 次要 / 注释，都是暖灰棕，不用纯灰
-- `--brand`：正文链接；`--brand-2`：按钮和装饰
-- `--peach` / `--butter` / `--mint` / `--lilac`：标签和点缀色
-- `--radius*` / `--shadow*`：圆角和阴影，卡片一律 22px 圆角
+- `--cream` / `--surface` / `--surface-2`：页面底色、卡片、卡片内嵌块（深色下是 `#0a0e1a` / `#0e1526`）
+- `--ink` / `--ink-2` / `--ink-3`：正文 / 次要 / 注释，用低亮度灰白，避免纯白刺眼
+- `--brand` / `--brand-2`：正文链接 / 霓虹强调色（深色 `#00d4ff`，浅色 `#0891b2`）
+- `--amber`：第二强调色，只用在渐变里（青 → 紫）
+- `--line` / `--hairline`：1px 细线与网格背景
+- `--shadow*` / `--glow-brand`：阴影阶梯与发光描边
 
-版式：
+版式与细节：
 
-- 正文 17–19px（随视口流体缩放）/ 行高 1.85；内容卡片自适应铺满视口，宽屏右侧带目录卡片（窄屏回退到正文里的目录块）
-- 版心用 `px` 而不是 `rem`：Material 在宽屏把根字号设成 20px，`40rem` 其实是 800px，会偏宽
-- 深色模式：同名变量在 `[data-md-color-scheme="slate"]` 下重新赋值，Hero 和按钮各有一套单独规则
+- 字体：Inter（拉丁）+ 系统中文；代码用 JetBrains Mono，woff2 都在 `docs/assets/fonts/`
+- 背景：32px 细网格 + 顶部青/紫两束光晕
+- 顶栏：毛玻璃（`backdrop-filter`）+ 细边框；当前选项卡是发光胶囊
+- 正文 17–19px（随视口流体缩放）/ 行高 1.85；卡片自适应铺满视口，宽屏右侧带目录
+- 代码块始终深色，左上角自动标语言（`docs/javascripts/code-label.js`）
+- 深色模式默认开启：`docs/javascripts/theme-default.js` 在没有保存过偏好时切到 slate
+
+## 功能清单
+
+| 功能 | 实现 |
+| --- | --- |
+| 全文搜索 | Material search（中文分词用 jieba），`Ctrl/⌘ + K` 唤起（`search-hotkey.js`） |
+| 标签 | Material tags 插件，`/tags/` 页 + 文章头部胶囊 |
+| RSS | `hooks/rss.py` 在构建末尾生成 `/feed.xml`，页面写 `date` 就进订阅 |
+| 阅读进度 | `read-progress.js`，顶部 2px 渐变条 |
+| 阅读时长 | `post-meta.js` 按正文字数估算（400 字/分钟） |
+| 回到顶部 | `back-to-top.js`，滚动 600px 后出现 |
+| 代码复制 / 语言标签 | Material 自带 + `code-label.js` |
+| 图表 / 公式 | Mermaid（本地按需加载）+ KaTeX（本地） |
+| 404 | 终端风格，`overrides/404.html` |
 
 ## 一点约定
 

@@ -1,12 +1,26 @@
 {#-
   正文容器：保持主题默认行为（自动补 h1），这里不动内容。
 -#}
-{% include "partials/tags.html" %}
 {% include "partials/actions.html" %}
 
 {% if "<h1" not in page.content %}
   <h1>{{ page.title | d(config.site_name, true)}}</h1>
 {% endif %}
+{% if page.meta and page.meta.tags %}
+<div class="post-meta">
+  {% if page.meta.date %}
+    <time datetime="{{ page.meta.date }}">{{ page.meta.date }}</time>
+    <span class="post-meta__dot"></span>
+  {% endif %}
+  <span data-reading-time>约 1 分钟</span>
+  <span class="post-meta__dot"></span>
+  {% for tag in page.meta.tags %}
+    {% set tname = tag.name if tag.name is defined else tag %}
+    <a class="tag" href="{{ 'tags/' | url }}" data-tag="{{ tname }}">#{{ tname }}</a>
+  {% endfor %}
+</div>
+{% endif %}
+
 {% if page.toc and page.toc | length >= 3 %}
   <nav class="toc-inline" aria-label="本页目录">
     <p class="toc-inline__title">本页目录</p>

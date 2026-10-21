@@ -1,4 +1,6 @@
 ---
+date: 2026-10-19
+tags: [Python, PyTorch, 自动微分]
 title: Tensor 与 autograd：把反向传播拆开看
 description: 从 requires_grad 到 loss.backward()，中间到底发生了什么
 ---

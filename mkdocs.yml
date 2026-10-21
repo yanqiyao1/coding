@@ -11,7 +11,7 @@ site_author: 严棋耀 Qiyao Yan
 repo_url: https://github.com/yanqiyao1/coding
 repo_name: yanqiyao1/coding
 edit_uri: edit/main/docs/
-copyright: © 2026 严棋耀
+copyright: © 2026 严棋耀 · <a href="/coding/feed.xml">RSS</a> · MkDocs Material
 
 # ----------------------------------------------------------------- 主题
 theme:
@@ -27,14 +27,14 @@ theme:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: white
-      accent: indigo
+      accent: cyan
       toggle:
         icon: material/weather-sunny
         name: 切换到深色模式
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: black
-      accent: indigo
+      accent: cyan
       toggle:
         icon: material/weather-night
         name: 切换到浅色模式
@@ -74,14 +74,20 @@ nav:
       - 强化学习: llm/rl/index.md
       - 后训练: llm/post-training/index.md
       - Code Agent: llm/code-agent/index.md
+  - 标签: tags.md
   - 关于: about/index.md
 
 # ----------------------------------------------------------------- 插件
+hooks:
+  - hooks/rss.py
+
 plugins:
   - search:
       lang:
         - zh
         - en
+  - tags:
+      listings_layout: default
 
 # ----------------------------------------------------------------- Markdown
 markdown_extensions:
@@ -136,6 +142,11 @@ extra_javascript:
   - assets/katex/auto-render.min.js
   - javascripts/katex.js
   - javascripts/read-progress.js
+  - javascripts/theme-default.js
+  - javascripts/code-label.js
+  - javascripts/post-meta.js
+  - javascripts/search-hotkey.js
+  - javascripts/back-to-top.js
 
 extra:
   social:

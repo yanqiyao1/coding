@@ -1,4 +1,6 @@
 ---
+date: 2026-10-21
+tags: [C++, 内存管理]
 title: RAII 与智能指针：谁负责 delete
 description: 从 lock_guard 到 weak_ptr，把「资源释放」交给对象的析构函数
 ---

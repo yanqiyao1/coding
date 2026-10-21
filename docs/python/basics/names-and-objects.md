@@ -1,4 +1,6 @@
 ---
+date: 2026-10-18
+tags: [Python, 基础]
 title: 变量不是盒子：Python 的对象模型
 description: is、可变默认参数、浅拷贝——这些坑全都从「名字绑定对象」这一条推出来
 ---

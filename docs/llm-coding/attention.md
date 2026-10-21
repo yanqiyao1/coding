@@ -1,4 +1,6 @@
 ---
+date: 2026-10-20
+tags: [LLM, 手撕, Attention]
 title: 手写 Self-Attention（含因果掩码）
 description: 从公式到多头，再到和 F.scaled_dot_product_attention 对齐
 ---
