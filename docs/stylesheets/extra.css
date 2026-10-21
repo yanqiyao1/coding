@@ -1293,7 +1293,15 @@ a.card:hover .card__arrow {
 
 /* --------------------------------------------------------------- 表格、提示框 */
 
+/* Material 把表格包在 inline-block 容器里，容器不撑开时 100% 也没用 */
+.md-typeset__table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
 .md-typeset table:not([class]) {
+  display: table;
   width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
