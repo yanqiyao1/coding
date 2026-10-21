@@ -167,7 +167,7 @@ html {
 /* --------------------------------------------------------------- 基础排版 */
 
 .md-typeset {
-  font-size: 0.88rem;
+  font-size: clamp(17px, 0.3vw + 14px, 19px);
   line-height: 1.85;
   color: var(--ink);
   text-rendering: optimizeLegibility;
@@ -429,13 +429,15 @@ html {
 /* --------------------------------------------------------------- 版心 */
 
 @media screen and (min-width: 76.25em) {
-  /* 两栏：正文宽卡 + 右侧目录 */
+  /* 两栏：正文卡片自适应铺满 + 右侧目录 */
   .md-main__inner {
-    max-width: 1140px;
-  }
-
-  .md-main__inner:has(.hero) {
-    max-width: 1280px;
+    width: 100%;
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 3vw, 3.5rem);
+    padding-right: clamp(1rem, 3vw, 3.5rem);
+    box-sizing: border-box;
   }
 
   .md-sidebar--primary {
@@ -445,7 +447,7 @@ html {
   .md-sidebar--secondary:not([hidden]) {
     display: block;
     order: 2;
-    width: 200px;
+    width: clamp(210px, 15vw, 250px);
     top: 5.2rem;
     align-self: flex-start;
     padding: 0;
@@ -498,15 +500,18 @@ html {
   }
 
   .md-content__inner.md-typeset:not(:has(.hero)) {
-    max-width: 880px;
+    width: 100%;
+    max-width: none;
     margin-left: auto !important;
     margin-right: auto !important;
-    padding: 2.4rem 3rem 3rem;
+    padding: clamp(1.6rem, 2.4vw, 3rem) clamp(1.4rem, 3vw, 3.4rem)
+      clamp(2rem, 3vw, 3.4rem);
   }
 
-  /* 首页：宽版心，才撑得起大标题与卡片网格 */
+  /* 首页：同样铺满，大标题和卡片网格才撑得开 */
   .md-content > .md-content__inner:has(.hero) {
-    max-width: 56rem;
+    width: 100%;
+    max-width: none;
     margin-left: auto !important;
     margin-right: auto !important;
   }
@@ -1052,8 +1057,10 @@ a.card:hover .card__arrow {
 
 /* 所有内容页（首页除外）都装进一张卡片里 */
 .md-content__inner.md-typeset:not(:has(.hero)) {
-  max-width: 880px;
-  padding: 2.4rem 3rem 3rem;
+  width: 100%;
+  max-width: none;
+  padding: clamp(1.6rem, 2.4vw, 3rem) clamp(1.4rem, 3vw, 3.4rem)
+    clamp(2rem, 3vw, 3.4rem);
   border: 1px solid var(--hairline);
   border-radius: 26px;
   background-color: var(--surface);
@@ -1479,8 +1486,8 @@ a.card:hover .card__arrow {
   }
 
   .md-content__inner.md-typeset:not(:has(.hero)) {
-    width: calc(100% - 1.8rem);
-    max-width: 880px;
+    width: calc(100% - 1.6rem);
+    max-width: none;
     padding: 1.3rem 1.15rem 1.7rem;
     border-radius: var(--radius);
     margin-left: auto !important;
