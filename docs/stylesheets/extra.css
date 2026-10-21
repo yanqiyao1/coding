@@ -2130,3 +2130,10 @@ a.card:hover .card__arrow {
 .md-search__icon {
   color: var(--ink-3);
 }
+
+/* 字体：Material 的 font: false 会在 body 上写死 --md-text-font-family，
+   这里用同层级的声明覆盖，让 Inter / JetBrains Mono 生效 */
+body {
+  --md-text-font-family: var(--sans);
+  --md-code-font-family: var(--mono);
+}
