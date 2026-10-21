@@ -642,130 +642,9 @@ body {
   line-height: 1.75;
 }
 
-/* --------------------------------------------------------------- 博客列表 */
+/* --------------------------------------------------------------- 正文卡片 */
 
-.post-list > .year {
-  display: inline-block;
-  margin: 2rem 0 0.9rem;
-  padding: 0.14rem 0.65rem;
-  border: 0;
-  border-radius: 999px;
-  background-color: var(--butter);
-  color: #8a6a2f;
-  font-family: var(--mono);
-  font-size: 0.64rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-}
-
-[data-md-color-scheme="slate"] .post-list > .year {
-  color: #e8c88a;
-}
-
-.md-post--excerpt {
-  margin: 0 0 1rem;
-  padding: 1.35rem 1.5rem 1.2rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background-color: var(--surface);
-  box-shadow: var(--shadow-md);
-  transition: transform 0.18s ease, box-shadow 0.18s ease,
-    border-color 0.18s ease;
-}
-
-.md-post--excerpt:hover {
-  transform: translateY(-2px);
-  border-color: var(--line-strong);
-  box-shadow: 0 1px 2px rgba(96, 62, 38, 0.05),
-    0 22px 40px -24px rgba(96, 62, 38, 0.45);
-}
-
-.md-post--excerpt .md-post__authors {
-  display: none;
-}
-
-.md-post__meta {
-  margin: 0 0 0.45rem;
-  color: var(--ink-3);
-  font-size: 0.66rem;
-}
-
-.md-post__meta .md-meta__link {
-  color: var(--brand);
-  font-weight: 600;
-}
-
-.md-post__content > h2 {
-  margin: 0 0 0.5rem;
-  padding: 0;
-  border: 0;
-  font-size: 1.05rem;
-  font-weight: 750;
-  line-height: 1.5;
-  letter-spacing: -0.01em;
-}
-
-.md-post__content > h2 a {
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.md-post__content > h2 a:hover {
-  color: var(--brand);
-}
-
-.md-post__content > p {
-  margin: 0.35rem 0 0.6rem;
-  color: var(--ink-2);
-  font-size: 0.78rem;
-  line-height: 1.75;
-}
-
-.md-post--excerpt .md-post__content > p {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.md-post--excerpt .md-post__content > p ~ p {
-  display: none;
-}
-
-.md-post--excerpt .md-post__content blockquote {
-  margin: 0.6rem 0;
-  padding: 0 0 0 0.9rem;
-  border-left: 2px solid var(--line-strong);
-  color: var(--ink-2);
-  font-size: 0.76rem;
-}
-
-.md-post__action a {
-  color: var(--brand);
-  font-size: 0.7rem;
-  font-weight: 650;
-  text-decoration: none;
-}
-
-.md-post__action a::after {
-  content: " →";
-  transition: margin 0.15s ease;
-}
-
-.md-post__action a:hover::after {
-  margin-left: 0.15rem;
-}
-
-/* --------------------------------------------------------------- 文章页 */
-
-.md-content--post {
-  display: block;
-}
-
-.md-content--post > .md-sidebar--post {
-  display: none;
-}
-
+/* 所有内容页（首页除外）都装进一张卡片里 */
 .md-content__inner.md-typeset:not(:has(.hero)) {
   max-width: 720px;
   padding: 2rem 2.3rem 2.6rem;
@@ -777,49 +656,55 @@ body {
   margin-right: auto !important;
 }
 
-/* 文章不长，右侧目录收起来，正文老老实实居中 */
+/* --------------------------------------------------------------- 目录 */
+
+/* 右侧目录收起来，改成正文里的折叠块（见 content.html） */
 @media screen and (min-width: 76.25em) {
-  .md-sidebar--secondary:has(+ .md-content--post) {
+  /* 主题用 .md-sidebar--secondary:not([hidden]) 强制显示，这里要更高优先级 */
+  .md-sidebar.md-sidebar--secondary:not([hidden]) {
     display: none;
   }
 }
 
-/* 标题上方的元信息：小胶囊 */
-.post-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0 0 1rem;
+.toc-inline {
+  margin: 1.4rem 0 2rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background-color: transparent;
+  font-size: 0.76rem;
 }
 
-.post-meta > * {
-  display: inline-block;
-  padding: 0.14rem 0.6rem;
-  border-radius: 999px;
-  background-color: var(--surface-2);
-  border: 1px solid var(--line);
+.md-typeset .toc-inline__title {
+  margin: 0 0 0.2rem;
+  color: var(--ink-3);
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+}
+
+.toc-inline ol {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.toc-inline li {
+  margin: 0.2rem 0;
+  color: var(--ink-3);
+  break-inside: avoid;
+}
+
+.md-typeset .toc-inline a {
   color: var(--ink-2);
-  font-size: 0.64rem;
-  line-height: 1.5;
-}
-
-.post-meta a {
-  color: var(--brand);
   text-decoration: none;
-  font-weight: 600;
 }
 
-.post-meta a:hover {
-  background-color: var(--peach);
+.md-typeset .toc-inline a:hover {
+  color: var(--brand);
+  text-decoration: underline;
 }
-
-.md-content--post .md-typeset > p:first-of-type {
-  color: var(--ink-2);
-  font-size: 0.88rem;
-}
-
-/* --------------------------------------------------------------- 目录 */
 
 .md-nav--secondary .md-nav__title {
   background-color: transparent;
@@ -1029,6 +914,10 @@ body {
 
   .md-typeset h1 {
     font-size: 1.45rem;
+  }
+
+  .toc-inline ol {
+    columns: 1;
   }
 }
 

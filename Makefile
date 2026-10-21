@@ -13,7 +13,7 @@ help:  ## 显示这份帮助
 	@echo "  make install   创建 .venv 并安装依赖"
 	@echo "  make serve     本地预览（带热重载）"
 	@echo "  make build     构建到 site/（strict 模式）"
-	@echo "  make new TITLE=\"标题\" SLUG=slug CATEGORY=分类   新建文章"
+	@echo "  make new TITLE=\"标题\" PATH=python/basics SLUG=slug   新建文章"
 	@echo "  make clean     删除构建产物"
 
 install:
@@ -31,6 +31,7 @@ clean:
 	rm -rf site
 
 new:
-	@test -n "$(TITLE)" || (echo '用法：make new TITLE="标题" SLUG=slug [CATEGORY=分类]' && exit 1)
-	@test -n "$(SLUG)" || (echo '请用 SLUG=... 指定 URL 片段（英文）' && exit 1)
-	$(PYTHON) scripts/new_post.py "$(TITLE)" --slug "$(SLUG)" --category "$(or $(CATEGORY),随笔)"
+	@test -n "$(TITLE)" || (echo '用法：make new TITLE="标题" PATH=python/basics SLUG=slug' && exit 1)
+	@test -n "$(PATH)" || (echo '请用 PATH=... 指定模块目录，如 python/basics' && exit 1)
+	@test -n "$(SLUG)" || (echo '请用 SLUG=... 指定文件名（英文）' && exit 1)
+	$(PYTHON) scripts/new_page.py "$(TITLE)" --path "$(PATH)" --slug "$(SLUG)"

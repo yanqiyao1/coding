@@ -1,6 +1,6 @@
 # Coding 笔记
 
-一个独立的编程博客，用 [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) 排版，GitHub Actions 自动构建，发布在 GitHub Pages 的项目路径下：
+一个按模块整理的编程笔记站，用 [MkDocs Material](https://squidfunk.github.io/mkdocs-material/) 排版，GitHub Actions 自动构建，发布在 GitHub Pages 的项目路径下：
 
 **<https://yanqiyao1.github.io/coding/>**
 
@@ -10,29 +10,47 @@
 
 ---
 
+## 四个模块
+
+| 模块 | 内容 |
+| --- | --- |
+| **Python** | 基础（对象模型、迭代器、装饰器）→ PyTorch（tensor、autograd、训练循环）→ LLM 项目 |
+| **C++** | 基础（对象模型、STL）→ 进阶（RAII、移动语义、并发） |
+| **算法** | 按题型整理的 LeetCode 题解，统一 C++ |
+| **LLM 手撕** | 面试要手写的组件：Attention、RoPE、KV Cache、Sampling |
+
 ## 目录结构
 
 ```text
 .
-├── mkdocs.yml                  # 站点配置：主题、导航、插件、Markdown 扩展
+├── mkdocs.yml                  # 站点配置：主题、导航、Markdown 扩展
 ├── requirements.txt            # 构建依赖（CI 和本地共用）
 ├── Makefile                    # 常用命令
-├── scripts/new_post.py         # 新建文章的小脚本
+├── scripts/new_page.py         # 新建文章的小脚本
 ├── .github/workflows/deploy.yml# GitHub Actions：构建并发布到 Pages
-├── overrides/                  # 主题模板覆盖（不写死在主题里）
-│   ├── partials/post.html      #   列表页的文章卡片
+├── overrides/                  # 主题模板覆盖
 │   ├── 404.html                #   404 页（静态模板，内容写死）
-│   ├── blog.html               #   列表页按年份分组
-│   ├── partials/content.html   #   文章页标题上方的元信息
-│   └── partials/languages/zh.html #  更短的中文文案
+│   └── partials/
+│       ├── content.html        #   正文容器
+│       └── languages/zh.html   #   中文文案微调
 └── docs/
     ├── index.md                # 首页
     ├── about/index.md          # 关于
-    ├── blog/
-    │   ├── index.md            # 文章列表（插件会把文章追加在下面）
-    │   ├── .authors.yml        # 作者信息
-    │   └── posts/              # 所有文章
-    ├── series/                 # 按主题组织的系列页
+    ├── python/
+    │   ├── index.md            # 模块总览
+    │   ├── basics/             #   基础
+    │   ├── pytorch/            #   PyTorch
+    │   └── llm-projects/       #   LLM 项目
+    ├── cpp/
+    │   ├── index.md
+    │   ├── basics/
+    │   └── advanced/
+    ├── algo/
+    │   ├── index.md            # 题型清单
+    │   └── two-pointers.md     # 按题型一篇文章
+    ├── llm-coding/
+    │   ├── index.md            # 题目清单
+    │   └── attention.md
     ├── stylesheets/extra.css   # 设计令牌与全部自定义样式
     ├── javascripts/            # Mermaid 按需加载
     └── assets/images/          # 图片放这里
@@ -51,55 +69,42 @@ make build       # 构建到 site/，strict 模式
 ## 写文章
 
 ```bash
-make new TITLE="gdb 的第一小时" SLUG=gdb-first-hour CATEGORY="系统与调试"
+make new TITLE="装饰器与闭包" PATH=python/basics SLUG=decorators
 ```
 
-会生成 `docs/blog/posts/2026-10-20-gdb-first-hour.md`，文章地址是 `/coding/blog/2026/10/20/gdb-first-hour/`。
+会生成 `docs/python/basics/decorators.md`，地址是 `/coding/python/basics/decorators/`。
 
-front matter 的字段：
+front matter 只有两个字段：
 
 | 字段 | 说明 |
 | --- | --- |
-| `date` | 发布日期，决定 URL 和排序 |
-| `title` | 标题，同时用于页面 `<h1>` 和列表 |
-| `slug` | URL 片段，**必须写**（中文标题无法自动转成 URL） |
-| `authors` | 对应 `docs/blog/.authors.yml` 里的键 |
-| `categories` | 分类，会自动生成分类页 |
-| `description` | 摘要，用于 SEO 和分享卡片 |
+| `title` | 标题，用于页面 `<h1>` 和导航 |
+| `description` | 一句话摘要，用于 SEO 和分享卡片 |
 
-正文里的 `<!-- more -->` 是摘要分隔符：它上面的内容会作为列表页的摘要，下面的是正文。
+正文结构：
 
 ```markdown
 ---
-date: 2026-10-20
-title: 文章标题
-slug: my-post
-authors: [qiyao]
-categories: [随笔]
-description: 一句话说清楚这篇文章讲什么
+title: 装饰器与闭包
+description: 一个装饰器到底包住了什么
 ---
 
-开头两三句话。这段话会出现在文章列表里。
+开头两三句话：为什么写这篇、读完能带走什么。
 
-<!-- more -->
+## 第一节
 
-## 正文
+正文。
 ```
 
-写完后直接 `git push`，一分钟左右自动上线。
+写完后记得在**模块的 `index.md`** 里加一条链接，否则读者只能从 URL 进来。
+
+新增一个模块目录时，还要在 `mkdocs.yml` 的 `nav:` 里加一项，否则 `--strict` 构建会报「页面不在导航中」。
 
 ## 部署
 
 `.github/workflows/deploy.yml` 干三件事：装依赖 → `mkdocs build --strict` → 把 `site/` 作为 Pages 产物发布。
 
-首次配置只需要做一次（仓库已经配好的话可以跳过）：
-
-1. 仓库 **Settings → Pages → Build and deployment → Source** 选 **GitHub Actions**
-2. 往 `main` 推一次，Actions 跑完即可
-
-!!! note "为什么不用 gh-deploy 分支"
-
-    `mkdocs gh-deploy` 会把构建产物推到 `gh-pages` 分支，历史里塞满编译结果。用官方的 Pages + Actions 流程，仓库里只有源码，产物不落盘。
+仓库设置里 **Settings → Pages → Source** 选 **GitHub Actions** 即可（已配置好）。往 `main` 推一次，一分钟左右上线。
 
 ## 想改点东西
 
@@ -107,38 +112,32 @@ description: 一句话说清楚这篇文章讲什么
 | --- | --- |
 | 站点名、描述、导航 | `mkdocs.yml` 顶部 / `nav:` |
 | 主色、明暗方案 | `mkdocs.yml` 的 `theme.palette` |
-| 颜色、字体、间距、首页样式 | `docs/stylesheets/extra.css` 顶部的设计变量 |
-| 列表页的元信息（日期/分类/时长） | `overrides/partials/post.html` |
+| 颜色、字体、间距、卡片样式 | `docs/stylesheets/extra.css` 顶部的设计变量 |
+| 首页 Hero 与四个模块入口 | `docs/index.md` |
+| 404 页文案 | `overrides/404.html` |
 | 中文文案（如「阅读全文」） | `overrides/partials/languages/zh.html` |
-| 文章列表每页条数 | `mkdocs.yml` 里 `blog.pagination_per_page` |
-| 分类、年份归档 | `mkdocs.yml` 里 `blog.categories` / `blog.archive` |
-| 首页 Hero 文案 | `docs/index.md` |
-| 作者头像与简介 | `docs/blog/.authors.yml` |
 
 ### 加图片
 
 放到 `docs/assets/images/`，然后：
 
 ```markdown
-![说明](../assets/images/screenshot.png)
+![说明](../../assets/images/screenshot.png)
 ```
 
-Material 支持图片缩放和标注，详见[官方文档](https://squidfunk.github.io/mkdocs-material/reference/images/)。
+路径按当前文件位置算相对路径。
 
 ### 想用数学公式
 
-现在没开（避免每个页面加载 MathJax）。需要时在 `mkdocs.yml` 的 `markdown_extensions` 里加：
+现在没开（避免每个页面加载 KaTeX）。需要时在 `mkdocs.yml` 里加：
 
 ```yaml
+markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
 ```
 
-再在 `extra_javascript` 里加载 MathJax 或 KaTeX 的脚本即可。
-
-### 想要 RSS
-
-Material 自带的 blog 插件不生成 RSS。需要的话加 [mkdocs-rss-plugin](https://github.com/Guts/mkdocs-rss-plugin)，在 `plugins:` 里注册并指向 `blog/posts`。
+再在 `extra_css` / `extra_javascript` 里引入 KaTeX 并调用 `renderMathInElement`。目前文章里的公式用 `text` 代码块写，够读。
 
 ## 设计约定
 
@@ -146,18 +145,15 @@ Material 自带的 blog 插件不生成 RSS。需要的话加 [mkdocs-rss-plugin
 
 - `--cream` / `--surface` / `--surface-2`：页面底色、卡片、卡片内嵌块
 - `--ink` / `--ink-2` / `--ink-3`：正文 / 次要 / 注释，都是暖灰棕，不用纯灰
-- `--brand`：正文链接（够深、可读）；`--brand-2`：按钮和装饰
-- `--peach` / `--butter` / `--mint` / `--lilac`：标签、年份、提示块用到的淡色
-- `--radius*` / `--shadow*`：圆角和阴影，卡片一律 22px 圆角 + 极浅投影
+- `--brand`：正文链接；`--brand-2`：按钮和装饰
+- `--peach` / `--butter` / `--mint` / `--lilac`：标签和点缀色
+- `--radius*` / `--shadow*`：圆角和阴影，卡片一律 22px 圆角
 
 版式：
 
-- 正文 17px / 行高 1.8；文章卡片 700px，列表和首页 720px
+- 正文 17px / 行高 1.8；内容卡片 720px
 - 版心用 `px` 而不是 `rem`：Material 在宽屏把根字号设成 20px，`40rem` 其实是 800px，会偏宽
-- 首页 Hero 是一张渐变卡片，右侧的小终端是纯 HTML/CSS，没有图片依赖
 - 深色模式：同名变量在 `[data-md-color-scheme="slate"]` 下重新赋值，Hero 和按钮各有一套单独规则
-
-改颜色时优先只动这几个变量；要动结构再看对应的组件段（Hero / panel / post-list / post-meta）。
 
 ## 一点约定
 

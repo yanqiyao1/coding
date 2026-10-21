@@ -6,7 +6,7 @@
 
 site_name: Coding 笔记
 site_url: https://yanqiyao1.github.io/coding/
-site_description: 严棋耀的编程笔记 —— C/C++、操作系统、算法与工程实践
+site_description: 严棋耀的编程笔记 —— Python、C++、算法与 LLM 手撕代码
 site_author: 严棋耀 Qiyao Yan
 repo_url: https://github.com/yanqiyao1/coding
 repo_name: yanqiyao1/coding
@@ -58,12 +58,17 @@ theme:
 # ----------------------------------------------------------------- 导航
 nav:
   - 首页: index.md
-  - 博客: blog/index.md
-  - 系列:
-      - series/index.md
-      - C 与内存: series/c-memory/index.md
-      - 系统与调试: series/systems/index.md
-      - 工具链: series/tooling/index.md
+  - Python:
+      - python/index.md
+      - 基础: python/basics/index.md
+      - PyTorch: python/pytorch/index.md
+      - LLM 项目: python/llm-projects/index.md
+  - C++:
+      - cpp/index.md
+      - 基础: cpp/basics/index.md
+      - 进阶: cpp/advanced/index.md
+  - 算法: algo/index.md
+  - LLM 手撕: llm-coding/index.md
   - 关于: about/index.md
 
 # ----------------------------------------------------------------- 插件
@@ -72,14 +77,6 @@ plugins:
       lang:
         - zh
         - en
-  - blog:
-      blog_dir: blog
-      post_dir: "{blog}/posts"
-      pagination_per_page: 8
-      pagination_if_single_page: false
-      post_excerpt_max_authors: 0
-      categories: true
-      archive: true
 
 # ----------------------------------------------------------------- Markdown
 markdown_extensions:

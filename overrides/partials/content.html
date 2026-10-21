@@ -1,29 +1,32 @@
 {#-
-  正文容器：在文章标题上方加一行元信息（日期 · 分类 · 阅读时长），
-  这样就不需要在左侧再放一个信息栏。
+  正文容器：保持主题默认行为（自动补 h1），这里不动内容。
 -#}
 {% include "partials/tags.html" %}
 {% include "partials/actions.html" %}
 
-{% if page.config and page.config.date %}
-  <div class="post-meta">
-    <time datetime="{{ page.config.date.created }}">
-      {{- page.config.date.created | date -}}
-    </time>
-    {% if page.categories %}
-      {% for category in page.categories %}
-        <a href="{{ category.url | url }}">{{ category.title }}</a>
-      {% endfor %}
-    {% endif %}
-    {% if page.config.readtime %}
-      <span>{{ page.config.readtime }} 分钟阅读</span>
-    {% endif %}
-  </div>
-{% endif %}
-
 {% if "<h1" not in page.content %}
   <h1>{{ page.title | d(config.site_name, true)}}</h1>
 {% endif %}
+{% if page.toc and page.toc | length >= 3 %}
+  <nav class="toc-inline" aria-label="本页目录">
+    <p class="toc-inline__title">本页目录</p>
+    <ol>
+      {% for item in page.toc %}
+        <li>
+          <a href="{{ item.url }}">{{ item.title }}</a>
+          {% if item.children %}
+            <ol>
+              {% for child in item.children %}
+                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+              {% endfor %}
+            </ol>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}
+
 {{ page.content }}
 {% include "partials/source-file.html" %}
 {% include "partials/feedback.html" %}
